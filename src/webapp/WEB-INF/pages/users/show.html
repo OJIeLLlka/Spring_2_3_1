@@ -8,7 +8,7 @@
 
 <hr>
 <h3 >
-    <p><a th:href="@{users/{id}/edit(id=${user.getId()})}" >Edit user</a></p>
+    <p><a th:href="@{/users/{id}/edit(id=${user.getId()})}" >Edit user</a></p>
 </h3>
 <hr>
 
@@ -16,6 +16,13 @@
 <p th:text="${user.getName()}">Value</p>
 <p th:text="${user.getAge()}">Value</p>
 <p th:text="${user.getEmail()}">Value</p>
+
+<hr>
+<form th:method="DELETE" th:action="@{/users/{id}/delete(id=${user.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+<hr>
+
 
 </body>
 </html>

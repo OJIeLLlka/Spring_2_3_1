@@ -7,17 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.service.UserService;
-
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/users")
 public class UsersController {
-
-//        List<User> userki = new ArrayList<>();
 
     private final UserService userService;
 
@@ -28,7 +22,6 @@ public class UsersController {
 
     @GetMapping()
     public String index(Model model) {
-//        model.addAttribute(userki);
 
         model.addAttribute(userService.getAllUsers());
         return "users/index";
@@ -36,7 +29,6 @@ public class UsersController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") long id, Model model) {
-//        model.addAttribute("user", userki.stream().filter(p -> p.getId() == id).findAny().orElse(null));
 
         model.addAttribute("user", userService.getUserById(id));
         return "users/show";
@@ -49,20 +41,18 @@ public class UsersController {
 
     @PostMapping()
     public String create(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
-//        userki.add(user);
 
         if (bindingResult.hasErrors()) {
-            return "redirect:/users";
+            return "users/new";
         }
 
         userService.saveUser(user);
-        return "users/users";
+        return "redirect:/users";
     }
 
     //РЕДАКТИРОВАНИЕ ЮЗЕРА
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") long id, Model model) {
-//        model.addAttribute(Objects.requireNonNull(userki.stream().filter(p -> p.getId() == id).findAny().orElse(null)));
 
         model.addAttribute("user", userService.getUserById(id));
         return "users/edit";
@@ -70,8 +60,7 @@ public class UsersController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
-                         @PathVariable("id") long id) {
+    public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "users/edit";
         }
@@ -80,7 +69,7 @@ public class UsersController {
         return "redirect:/users";
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping("/{id}/delete")
     public String delete(@PathVariable("id") long id) {
         userService.removeUserById(id);
         return "redirect:/users";

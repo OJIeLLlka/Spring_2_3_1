@@ -1,6 +1,5 @@
 package web.dao;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
@@ -17,7 +16,6 @@ public class UserDaoHibernateImpl implements UserDao {
     @Transactional
     @Override
     public void saveUser(User user) {
-
         entityManager.persist(user);
     }
 
@@ -34,14 +32,10 @@ public class UserDaoHibernateImpl implements UserDao {
         entityManager.merge(user);
     }
 
-    @Transactional
-    @Override
     public List<User> getAllUsers() {
         return entityManager.createQuery("select u from User u", User.class).getResultList();
     }
 
-    @Transactional
-    @Override
     public User getUserById(long id) {
         return entityManager.find(User.class, id);
     }

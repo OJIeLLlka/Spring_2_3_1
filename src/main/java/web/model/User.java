@@ -6,9 +6,11 @@ import javax.validation.constraints.*;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
+
     @Column
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name length should be between 2 and 30 characters")
