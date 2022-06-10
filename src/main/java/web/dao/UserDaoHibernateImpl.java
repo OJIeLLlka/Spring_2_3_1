@@ -5,7 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import java.util.List;
 
 @Repository
@@ -23,7 +22,6 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void removeUserById(long id) {
         entityManager.remove(getUserById(id));
-
     }
 
     @Transactional
