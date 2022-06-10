@@ -31,11 +31,10 @@
 </table>
 
 <hr>
-<form th:method="DELETE" th:action="@{/users/{id}/delete(id=${user.getId()})}">
+<form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
     <input type="submit" value="Delete"/>
 </form>
 <hr>
-
 
 </body>
 </html>
